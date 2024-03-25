@@ -1,5 +1,21 @@
 ﻿int totalTime = 0;
 object lockObject = new object();
+WakeUpAndLieInBed(6);
+await Task.WhenAll(
+    PutKettleOnStove(3),
+    HeatUpDinner(3),
+    FillBathtub(3)
+);
+TakeBath(15);
+GetDressed(5);
+GoToWork(54);
+Task th = Task.Run(() =>
+{
+    HaveBreakfast(1);
+});
+th.Wait();
+
+Console.WriteLine($"Общее затраченное время: {totalTime} минут, Вася успел ровно к 9:00");
 
 async Task PutKettleOnStove(int minutes)
 {
