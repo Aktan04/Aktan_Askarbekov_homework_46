@@ -1,6 +1,36 @@
 ﻿int totalTime = 0;
 object lockObject = new object();
 
+async Task PutKettleOnStove(int minutes)
+{
+    await Task.Delay(minutes * 100);
+    lock (lockObject)
+    {
+        Console.WriteLine($"Вася поставил чайник на плиту и пошел выполнять другие задачи. Завершил он это за {minutes} минут");
+        totalTime += minutes;
+    }
+}
+
+async Task HeatUpDinner(int minutes)
+{
+    await Task.Delay(minutes * 100);
+    lock (lockObject)
+    {
+        Console.WriteLine($"Вася потратил на то чтобы разогреть еду {minutes} минут, т.к. он параллельно еще кипятил воду для чая");
+        totalTime += minutes;
+    }
+}
+
+async Task FillBathtub(int minutes)
+{
+    await Task.Delay(minutes * 100);
+    lock (lockObject)
+    {
+        Console.WriteLine($"Вася наполнил ванну за {minutes} минут, так как он стал дожидаться и пошел разогревать еду");
+        totalTime += minutes;
+    }
+}
+
 void WakeUpAndLieInBed(int minutes)
 {
     Thread.Sleep(minutes * 100);
